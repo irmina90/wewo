@@ -32,6 +32,13 @@
             <version>1.16.16</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
+            <version>1.10.4.RELEASE</version>
+        </dependency>
+
     </dependencies>
+
 
 </project>
