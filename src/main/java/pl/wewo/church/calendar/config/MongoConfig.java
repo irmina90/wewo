@@ -2,8 +2,12 @@ package pl.wewo.church.calendar.config;
 
 import com.mongodb.Mongo;
 import com.mongodb.MongoClient;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.convert.MappingMongoConverter;
 
 /**
  * Created by lasjak on 7/4/2017.
@@ -19,4 +23,5 @@ public class MongoConfig extends AbstractMongoConfiguration {
 	public Mongo mongo() throws Exception {
 		return new MongoClient("localhost", 27017);
 	}
+
 }
