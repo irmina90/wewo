@@ -14,6 +14,7 @@ import java.util.List;
 
 @Component
 public class MongoUserDetailsService implements UserDetailsService {
+
 	@Autowired
 	private UserRepository repository;
 
@@ -25,7 +26,7 @@ public class MongoUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found");
 		}
 
-		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("user"));
+		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USER"));
 
 		return new User(user.getUsername(), user.getPassword(), authorities);
 	}
