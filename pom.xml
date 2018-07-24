@@ -15,7 +15,7 @@
     </parent>
 
     <properties>
-        <lombok.version>1.16.16</lombok.version>
+        <lombok.version>1.18.0</lombok.version>
         <swagger.version>2.9.2</swagger.version>
     </properties>
 
