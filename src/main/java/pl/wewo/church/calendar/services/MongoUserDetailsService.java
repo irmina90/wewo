@@ -1,16 +1,18 @@
 package pl.wewo.church.calendar.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
+import pl.wewo.church.calendar.user.User;
 import pl.wewo.church.calendar.user.UserRepository;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class MongoUserDetailsService implements UserDetailsService {
@@ -20,14 +22,21 @@ public class MongoUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		pl.wewo.church.calendar.user.User user = repository.findByUsername(username);
+		User user = repository.findByUsername(username);
 
 		if(user == null) {
-			throw new UsernameNotFoundException("User not found");
+			throw new UsernameNotFoundException(username);
 		}
 
-		List<SimpleGrantedAuthority> authorities = Arrays.asList(new SimpleGrantedAuthority("USER"));
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), getAuthorities(user));
+	}
 
-		return new User(user.getUsername(), user.getPassword(), authorities);
+	private List<GrantedAuthority> getAuthorities(User user) {
+		Set<String> roles = user.getRoles();
+		List<GrantedAuthority> authorities = new ArrayList<>();
+		for (String role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role));
+		}
+		return authorities;
 	}
 }
