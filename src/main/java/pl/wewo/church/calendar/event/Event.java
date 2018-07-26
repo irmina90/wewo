@@ -17,6 +17,6 @@ public class Event {
 	private String name;
 	private LocalDateTime startDateTime;
 	private LocalDateTime endDateTime;
-//	private User owner;
+	private String ownerName;
 
 }
