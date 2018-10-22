@@ -10,7 +10,7 @@ import pl.wewo.church.calendar.user.UserRepository;
 import javax.annotation.PostConstruct;
 
 @Service
-public class DataLoader {
+public class DBInitial {
 
 	@Autowired
 	private UserRepository userRepository;
